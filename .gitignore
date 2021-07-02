@@ -1,0 +1,5 @@
+.idea
+__pycache__
+temps/
+db.sqlite3
+*/migrations/[0123456789]*
