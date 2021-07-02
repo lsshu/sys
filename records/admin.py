@@ -118,3 +118,7 @@ def index_decorator(func):
 
 admin.site.index = index_decorator(admin.site.index)
 admin.site.app_index = index_decorator(admin.site.app_index)
+
+admin.site.site_title = "System Admin-Lsshu"
+admin.site.site_header = "System"
+admin.site.index_title = "System Admin"

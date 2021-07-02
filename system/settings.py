@@ -125,9 +125,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 附件生成到的目录 在nginx要配置
 STATIC_ROOT = os.path.join(BASE_DIR, "temps")
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 # Celery Configuration Options
 CELERY_TIMEZONE = "Asia/Shanghai"
