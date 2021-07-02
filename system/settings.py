@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-#         'NAME': 'sys_gjlvxing_com',  # 数据库名
-#         'USER': 'sys_gjlvxing_com',  # 账号
-#         'PASSWORD': 'hpdCfxciWcNcfhzT',  # 密码
-#         'HOST': '172.16.0.142',  # HOST
-#         'POST': 3306,  # 端口
-#
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        'NAME': 'sys_gjlvxing_com',  # 数据库名
+        'USER': 'sys_gjlvxing_com',  # 账号
+        'PASSWORD': 'hpdCfxciWcNcfhzT',  # 密码
+        'HOST': '39.100.96.41',  # HOST
+        'POST': 3306,  # 端口
+
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -121,7 +121,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
