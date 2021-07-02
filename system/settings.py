@@ -122,7 +122,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# 附件生成到的目录 在nginx要配置
+STATIC_ROOT = os.path.join(BASE_DIR, "temps")
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
