@@ -26,6 +26,8 @@ class RankingProxiesAdmin(admin.ModelAdmin):
     list_display = fields + ('updated_at',)
     list_display_links = ('proxies',)
     ordering = ('-expires_time',)
+    list_filter = ('proxy', 'username', 'password', 'ranking_region', 'area', 'expires_time')
+    list_per_page = 20
 
 
 @admin.register(RankingParts)
@@ -36,6 +38,8 @@ class RankingPartsAdmin(admin.ModelAdmin):
     fields = ('name', 'remarks')
     list_display = fields + ('updated_at',)
     list_display_links = ('name',)
+    list_filter = fields
+    list_per_page = 20
 
 
 @admin.register(RankingVocabularies)
@@ -47,6 +51,7 @@ class RankingVocabulariesAdmin(admin.ModelAdmin):
     fields = default + ('is_batch', 'batch')
     list_display = default + ('updated_at',)
     list_display_links = ('words',)
+    list_filter = default
     list_per_page = 20
 
 
@@ -61,3 +66,7 @@ class RankingRecordsAdmin(admin.ModelAdmin):
     list_display = fields + ('updated_at',)
     # list_display_links = ('is_self',)
     ordering = ["-created_at"]
+    list_filter = (
+        'ranking_vocabularie__operating_market', 'ranking_vocabularie', 'ranking_region', 'ad_device', 'ad_position',
+        'is_self', 'ad_copyright', 'updated_at')
+    list_per_page = 100
