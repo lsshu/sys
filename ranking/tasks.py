@@ -5,7 +5,7 @@ from ranking.models import RankingRecords, RankingVocabularies, RankingRegions
 
 
 @shared_task
-def all_ranking():
+def task_all_ranking():
     # 词汇
     vocabularies = RankingVocabularies.objects.all()
     # 代理地区
@@ -15,11 +15,11 @@ def all_ranking():
             datum = dict()
             datum['region'] = {"id": region.id, "name": region.name}
             datum['vocabulary'] = {"id": vocabulary.id, "words": vocabulary.words}
-            ranking_task.delay(**datum)
+            task_ranking.delay(**datum)
 
 
 @shared_task
-def ranking_task(**kwargs):
+def task_ranking(**kwargs):
     """
     全部 排名 task
     """

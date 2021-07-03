@@ -135,8 +135,7 @@ class OwnerTimeAtSchemaSoftDeletable(TimeAtSchemaModel, SoftDeletableModel, Owne
         abstract = True
 
 
-class DefaultModel(TimeAtSchemaModel, SoftDeletableModel, StatusSchemaModel, UUIDFieldModel, HiddenSchemaModel,
-                   OwnerSchemaModel):
+class DefaultModel(TimeAtSchemaModel, SoftDeletableModel, StatusSchemaModel, HiddenSchemaModel, OwnerSchemaModel):
     """
     谁的 隐藏 UUID 状态 时间 软删除类
     """

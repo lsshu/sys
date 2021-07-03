@@ -6,7 +6,7 @@ from django.utils import timezone
 from lxml import etree
 
 from ranking.models import RankingRegions, RankingProxies
-from ranking.user_agent import rand_user_agent
+from ranking.user_agent import rand_computer_user_agent, rand_mobile_user_agent
 
 
 def get_bd_mobile_ranking(*args, **kwargs):
@@ -17,7 +17,7 @@ def get_bd_mobile_ranking(*args, **kwargs):
         url = "https://m.baidu.com/from=844b/s"
         keywords = kwargs.get("keywords", None)
         headers = kwargs.get("headers", {
-            'User-Agent': "Mozilla/5.0 (Linux; Android 7.0; SM-G892A Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/67.0.3396.87 Mobile Safari/537.36"
+            'User-Agent': rand_mobile_user_agent()
         })
         proxies = kwargs.get('proxies', {})
         params = {
@@ -53,7 +53,7 @@ def get_bd_computer_ranking(*args, **kwargs):
         url = "https://www.baidu.com/s"
         keywords = kwargs.get("keywords", None)
         headers = kwargs.get("headers", {
-            'User-Agent': rand_user_agent()
+            'User-Agent': rand_computer_user_agent()
         })
         proxies = kwargs.get('proxies', {})
         params = {
@@ -107,14 +107,14 @@ def get_proxies(**kwargs):
         }
         api_url += "?" + urlencode(params)
         proxy_response = requests.get(api_url).json()
-        # print(proxy_response)
+        # proxy_response = simulation_proxies_response()
         try:
             (proxy_ip, area, sep) = proxy_response['data']['proxy_list'][0].split(',')
             code = proxy_response['code']
             order_count = proxy_response['data']['order_left_count']
             dedup_count = proxy_response['data']['dedup_count']
 
-            expires_time = datetime.datetime.now() + datetime.timedelta(seconds=int(sep))
+            expires_time = timezone.now() + datetime.timedelta(seconds=int(sep))
             proxies = RankingProxies.objects.create(proxy=proxy, username=username, password=password, proxies=proxy_ip,
                                                     ranking_region=region, expires_time=expires_time, code=code,
                                                     sep=sep,
@@ -127,4 +127,24 @@ def get_proxies(**kwargs):
                                                         "proxy": proxies.proxies},
         "https": "http://%(user)s:%(pwd)s@%(proxy)s/" % {"user": proxies.username, "pwd": proxies.password,
                                                          "proxy": proxies.proxies}
+    }
+
+
+def simulation_proxies_response():
+    import random
+    """
+    模拟 获取 代理
+    """
+    areas = ['佛山', '南宁', '北海', '杭州', '南昌', '厦门', '温州']
+    return {
+        "code": 0,
+        "data": {
+            "order_left_count": 100,
+            "dedup_count": 1,
+            "proxy_list": [
+                "{}.{}.{}.{},{},{}".format(random.randint(1, 255), random.randint(1, 255),
+                                           random.randint(1, 255), random.randint(1, 255), random.choice(areas),
+                                           random.randint(20, 60))
+            ]
+        }
     }

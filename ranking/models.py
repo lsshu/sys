@@ -89,7 +89,7 @@ class RankingProxies(DefaultModel):
     username = models.CharField(max_length=20, null=True, blank=True, verbose_name="代理账号")
     password = models.CharField(max_length=40, null=True, blank=True, verbose_name="代理密码")
     proxies = models.CharField(max_length=25, null=False, blank=False, verbose_name='地区代理')
-    ranking_region = models.ForeignKey(RankingRegions, on_delete=models.CASCADE, null=False, blank=False,
+    ranking_region = models.ForeignKey(RankingRegions, on_delete=models.SET_NULL, null=True, blank=False,
                                        verbose_name="代理地区")
     code = models.IntegerField(null=True, default=0, blank=True, verbose_name="返回码")
     order_count = models.IntegerField(null=True, default=0, blank=True, verbose_name="剩余数")
@@ -112,9 +112,9 @@ class RankingRecords(DefaultModel):
     """
     排名记录
     """
-    ranking_vocabularie = models.ForeignKey(RankingVocabularies, on_delete=models.CASCADE, null=False, blank=False,
+    ranking_vocabularie = models.ForeignKey(RankingVocabularies, on_delete=models.SET_NULL, null=True, blank=False,
                                             verbose_name="排名词汇")
-    ranking_region = models.ForeignKey(RankingRegions, on_delete=models.CASCADE, null=True, blank=False,
+    ranking_region = models.ForeignKey(RankingRegions, on_delete=models.SET_NULL, null=True, blank=False,
                                        verbose_name="代理地区")
     proxies = models.ForeignKey(RankingProxies, on_delete=models.SET_NULL, null=True, blank=False, verbose_name='地区代理')
 

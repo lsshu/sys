@@ -19,5 +19,5 @@ def test(request):
             datum = dict()
             datum['region'] = {"id": region.id, "name": region.name}
             datum['vocabulary'] = {"id": vocabulary.id, "words": vocabulary.words}
-            tasks.ranking_task.delay(**datum)
+            tasks.task_all_ranking.delay(**datum)
     return HttpResponse('ok')
