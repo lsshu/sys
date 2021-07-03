@@ -94,10 +94,10 @@ def get_proxies(**kwargs):
     if not area or not username or not password:
         return False, "area_username_password"
     region, t = RankingRegions.objects.get_or_create(name=area)
-    try:
-        proxies = RankingProxies.objects.filter(expires_time__gt=timezone.now(), proxy=proxy, username=username,
-                                                password=password, ranking_region=region).first()
-    except RankingProxies.DoesNotExist:
+
+    proxies = RankingProxies.objects.filter(expires_time__gt=timezone.now(), proxy=proxy, username=username,
+                                            password=password, ranking_region=region).first()
+    if not proxies:
         import requests
         import datetime
         params = {
