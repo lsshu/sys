@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'records.apps.RecordsConfig',
-    'ranking.apps.RankingConfig'
+    'ranking.apps.RankingConfig',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'system.urls'
@@ -115,13 +117,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -191,3 +193,8 @@ PROXY_DEFAULT = "kdlapi"
 #         },
 #     }
 # }
+
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
