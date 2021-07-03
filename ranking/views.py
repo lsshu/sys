@@ -1,12 +1,7 @@
-from time import sleep
+from django.http import HttpResponse
 
-from django.forms import model_to_dict
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-
-from ranking.methods import get_proxies, get_bd_computer_ranking, get_bd_mobile_ranking
 from ranking.models import RankingVocabularies, RankingRegions
-from ranking import tasks
+from ranking.tasks import task_ranking
 
 
 def test(request):
@@ -19,5 +14,5 @@ def test(request):
             datum = dict()
             datum['region'] = {"id": region.id, "name": region.name}
             datum['vocabulary'] = {"id": vocabulary.id, "words": vocabulary.words}
-            tasks.task_all_ranking.delay(**datum)
+            task_ranking.delay(**datum)
     return HttpResponse('ok')
