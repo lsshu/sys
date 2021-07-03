@@ -23,6 +23,7 @@ def task_ranking(**kwargs):
     """
     全部 排名 task
     """
+    errors = list()
     region = kwargs.get('region')
     vocabulary = kwargs.get('vocabulary')
     proxy, proxies = get_proxies(area=region['name'])
@@ -44,7 +45,7 @@ def task_ranking(**kwargs):
             record_data['ad_copyright'] = ranking_data['domain']
             RankingRecords.objects.create(**record_data)
     else:
-        return error
+        errors.append(error)
 
     ranking_response, error = get_bd_mobile_ranking(keywords=vocabulary['words'], proxies=proxies)
     if ranking_response:
@@ -60,4 +61,5 @@ def task_ranking(**kwargs):
             record_data['ad_copyright'] = ranking_data['domain']
             RankingRecords.objects.create(**record_data)
     else:
-        return error
+        errors.append(error)
+    return errors
