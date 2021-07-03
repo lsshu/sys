@@ -96,7 +96,7 @@ def get_proxies(**kwargs):
     region, t = RankingRegions.objects.get_or_create(name=area)
     try:
         proxies = RankingProxies.objects.filter(expires_time__gt=timezone.now(), proxy=proxy, username=username,
-                                                password=password, ranking_region=region).get()
+                                                password=password, ranking_region=region).first()
     except RankingProxies.DoesNotExist:
         import requests
         import datetime

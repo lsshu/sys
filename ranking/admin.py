@@ -11,6 +11,7 @@ class RankingRegionsAdmin(admin.ModelAdmin):
     """
     fields = ('name', 'remarks')
     list_display = fields + ('updated_at',)
+    ordering = ('-id',)
     list_display_links = ('name',)
 
 
@@ -25,7 +26,8 @@ class RankingProxiesAdmin(admin.ModelAdmin):
         'expires_time')
     list_display = fields + ('updated_at',)
     list_display_links = ('proxies',)
-    ordering = ('-expires_time',)
+    list_select_related = ('ranking_region',)
+    ordering = ('-id',)
     list_filter = ('proxy', 'username', 'password', 'ranking_region', 'area', 'expires_time')
     list_per_page = 20
 
@@ -38,6 +40,7 @@ class RankingPartsAdmin(admin.ModelAdmin):
     fields = ('name', 'remarks')
     list_display = fields + ('updated_at',)
     list_display_links = ('name',)
+    ordering = ('-id',)
     list_filter = fields
     list_per_page = 20
 
@@ -51,6 +54,8 @@ class RankingVocabulariesAdmin(admin.ModelAdmin):
     fields = default + ('is_batch', 'batch')
     list_display = default + ('updated_at',)
     list_display_links = ('words',)
+    list_select_related = ('ranking_part', 'operating_market')
+    ordering = ('-id',)
     list_filter = default
     list_per_page = 20
 
@@ -65,7 +70,8 @@ class RankingRecordsAdmin(admin.ModelAdmin):
         'ad_copyright', 'is_self', 'promotion_account')
     list_display = fields + ('updated_at',)
     # list_display_links = ('is_self',)
-    ordering = ["-created_at"]
+    list_select_related = ('ranking_vocabularie', 'ranking_region', 'proxies', 'promotion_account')
+    ordering = ["-id"]
     list_filter = (
         'ranking_vocabularie__operating_market', 'ranking_vocabularie', 'ranking_region', 'ad_device', 'ad_position',
         'is_self', 'ad_copyright', 'updated_at')

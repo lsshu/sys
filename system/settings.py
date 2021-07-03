@@ -90,6 +90,7 @@ DATABASES = {
         'USER': 'sys_gjlvxing_com',  # 账号
         'PASSWORD': 'hpdCfxciWcNcfhzT',  # 密码
         'HOST': '39.100.96.41',  # HOST
+        # 'HOST': '172.16.0.142',  # HOST
         'POST': 3306,  # 端口
 
     }
