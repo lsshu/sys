@@ -125,7 +125,7 @@ class RankingRecords(DefaultModel):
                                    blank=False, default="left",
                                    verbose_name='广告位置')
     ad_id = models.IntegerField(null=True, blank=False, verbose_name='广告排名')
-    ad_title = models.CharField(max_length=50, null=False, blank=False, verbose_name='广告标题')
+    ad_title = models.CharField(max_length=80, null=False, blank=False, verbose_name='广告标题')
     ad_copyright = models.CharField(max_length=50, null=False, blank=False, verbose_name='广告版权')
     is_self = models.CharField(max_length=5, choices=[('yes', '是'), ('no', '否')], null=False,
                                default="no", verbose_name='是否自己', help_text="是不是自己公司的账户")
